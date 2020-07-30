@@ -18,3 +18,5 @@ git clone https://github.com/suelife/tomato_clock.git
 cd tomato_clock
 app.py
 ```
+
+If you're not install anything, used **app.exe** file.
