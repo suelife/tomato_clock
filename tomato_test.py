@@ -8,8 +8,11 @@ class TomatoClock:
         self.__BREAK_MINUTES = 5
 
     def summary(self):
-        print(f"WORK_MINUTES: {self.__WORK_MINUTES}")
-        print(f"BREAK_MINUTES: {self.__BREAK_MINUTES}")
+        print("=====Summary=====")
+        print(f"工作時間: {self.__WORK_MINUTES}")
+        print(f"休息時間: {self.__BREAK_MINUTES}")
+        print("=================")
+        print()
     
     def set_work_minutes(self, minutes):
         self.__WORK_MINUTES = minutes
@@ -17,11 +20,11 @@ class TomatoClock:
     def set_break_minutes(self, minutes):
         self.__BREAK_MINUTES = minutes
 
-    def timer(self):
+    def timer(self, minutes):
         start_time = time.perf_counter()
         while True:
             deviation_second = round(time.perf_counter() - start_time)
-            remaining_second = self.__WORK_MINUTES * 60 - deviation_second
+            remaining_second = int(minutes * 60 - deviation_second)
             self.__prograssbar(remaining_second)
             if remaining_second <= 0:
                 print()
@@ -37,9 +40,15 @@ class TomatoClock:
     def notify_message(self, content):
         print(f"{str(content)}")
 
+    def run(self):
+        print()
+        self.timer(self.__WORK_MINUTES)
+        self.notify_message("Time to break!")
+        self.timer(self.__BREAK_MINUTES)
+        self.notify_message("Time to work!")
     
 if __name__ == "__main__":
     tomato = TomatoClock()
-    tomato.set_work_minutes(0.05)
+    tomato.set_work_minutes(2.0)
     tomato.timer()
     tomato.notify_message("Time to break.")
