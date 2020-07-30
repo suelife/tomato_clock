@@ -13,7 +13,7 @@ class TomatoClock:
         print(f"休息時間: {self.__BREAK_MINUTES}")
         print("=================")
         print()
-    
+
     def set_work_minutes(self, minutes):
         self.__WORK_MINUTES = minutes
 
@@ -30,14 +30,15 @@ class TomatoClock:
                 print()
                 break
             time.sleep(1)
-    
+
     def __prograssbar(self, remaining_second, past_second, total_second, duration=10):
-        minute, second = int(remaining_second/60), int(remaining_second%60)
+        minute, second = int(remaining_second/60), int(remaining_second % 60)
         remaining_time = datetime.time(minute=minute, second=second)
         remaining_text = remaining_time.strftime("%M:%S")
         percent = past_second/total_second
         past_bar = round(percent*duration)
-        print(f"{'=='*past_bar}{'--'*(duration-past_bar)} [{remaining_text}]", end="\r")
+        print(f"{'=='*past_bar}{'--'*(duration-past_bar)} [{remaining_text}]",
+              end="\r")
 
     def notify_message(self, content):
         print(f"{str(content)}")
@@ -48,10 +49,9 @@ class TomatoClock:
         self.notify_message("是時候休息囉。")
         self.timer(self.__BREAK_MINUTES)
         self.notify_message("是時候工作囉。")
-    
+
+
 if __name__ == "__main__":
     tomato = TomatoClock()
     tomato.set_work_minutes(1)
     tomato.run()
-    # tomato.timer()
-    # tomato.notify_message("Time to break.")
