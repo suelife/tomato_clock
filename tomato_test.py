@@ -25,17 +25,19 @@ class TomatoClock:
         while True:
             past_second = round(time.perf_counter() - start_time)
             remaining_second = int(minutes * 60 - past_second)
-            self.__prograssbar(remaining_second)
+            self.__prograssbar(remaining_second, past_second, minutes * 60)
             if remaining_second <= 0:
                 print()
                 break
             time.sleep(1)
     
-    def __prograssbar(self, total_second):
-        minute, second = int(total_second/60), int(total_second%60)
+    def __prograssbar(self, remaining_second, past_second, total_second, duration=10):
+        minute, second = int(remaining_second/60), int(remaining_second%60)
         remaining_time = datetime.time(minute=minute, second=second)
         remaining_text = remaining_time.strftime("%M:%S")
-        print(f"剩餘時間: {remaining_text}", end="\r")
+        percent = past_second/total_second
+        past_bar = round(percent*duration)
+        print(f"{'=='*past_bar}{'--'*(duration-past_bar)} [{remaining_text}]", end="\r")
 
     def notify_message(self, content):
         print(f"{str(content)}")
