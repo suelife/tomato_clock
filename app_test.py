@@ -33,14 +33,12 @@ def set_minutes(text):
 def main():
     tomato = TomatoClock()
     tomato.summary()
-
     if is_change_work_and_break_time():
         tomato.set_work_minutes(set_minutes("工作"))
         tomato.set_break_minutes(set_minutes("休息"))
-        tomato.summary()
-        
+        # tomato.summary()
+    tomato.run()
 
 
 if __name__ == "__main__":
-    # main()
-    set_minutes()
+    main()
