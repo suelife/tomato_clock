@@ -22,11 +22,10 @@ class TomatoClock:
         while True:
             deviation_second = round(time.perf_counter() - start_time)
             remaining_second = self.__WORK_MINUTES * 60 - deviation_second
-            if remaining_second <= -1:
+            self.__prograssbar(remaining_second)
+            if remaining_second <= 0:
                 print()
                 break
-            else:
-                self.__prograssbar(remaining_second)
             time.sleep(1)
     
     def __prograssbar(self, total_second):
@@ -41,6 +40,6 @@ class TomatoClock:
     
 if __name__ == "__main__":
     tomato = TomatoClock()
-    tomato.set_work_minutes(0.1)
+    tomato.set_work_minutes(0.05)
     tomato.timer()
     tomato.notify_message("Time to break.")
